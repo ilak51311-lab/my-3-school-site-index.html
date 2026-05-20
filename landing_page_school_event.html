@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Landing Page для шкільного заходу" />
+  <title>Шкільний захід — Landing Page</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --primary: #2557d6;
+      --primary-dark: #1b44aa;
+      --accent: #ffd54f;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ef;
+      --shadow: 0 12px 30px rgba(37, 87, 214, 0.10);
+      --radius: 20px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 30%, #ffffff 100%);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 16px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2;
+      margin: 0 0 14px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      margin: 0 auto 42px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(219, 227, 239, 0.9);
+    }
+
+    .header-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #6c8dff);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--primary);
+      outline: none;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      background: var(--primary-dark);
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .hero {
+      padding: 64px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(37, 87, 214, 0.10);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.3rem);
+      line-height: 1.08;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 640px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card,
+    .card,
+    .gallery-item,
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .program-grid,
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card-number {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 213, 79, 0.35);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .gallery-item figcaption {
+      padding: 16px 18px 18px;
+      font-weight: 600;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-card h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+
+    .contact-card p,
+    .contact-card li {
+      color: var(--muted);
+    }
+
+    .contact-list {
+      padding-left: 18px;
+      margin: 18px 0 0;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary);
+      outline: 3px solid rgba(37, 87, 214, 0.15);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .contact-wrap,
+      .program-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding: 14px 0;
+      }
+
+      .hero,
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero-stats,
+      .program-grid,
+      .gallery-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+
+      .nav {
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="#top">
+        <span class="logo-badge">Ш</span>
+        <span>School Event 2026</span>
+      </a>
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#about">Про захід</a>
+        <a href="#program">Програма</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#contact">Зворотний зв'язок</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Алгоритмізація проєкту</span>
+          <h1>Шкільний захід, який об'єднує учнів, учителів і батьків</h1>
+          <p>
+            Мета сторінки — коротко і зрозуміло представити шкільний захід, показати програму,
+            фотомоменти та дати можливість швидко залишити повідомлення через форму зворотного зв'язку.
+            Для реалізації обрано HTML5 і CSS3, щоб сайт був адаптивним, легким і зручним на телефоні,
+            планшеті та комп'ютері.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">Зареєструватися</a>
+            <a class="button button-secondary" href="#gallery">Переглянути галерею</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>1 день</strong>
+              <span>Насичена програма</span>
+            </div>
+            <div class="stat-card">
+              <strong>5 локацій</strong>
+              <span>Інтерактивні зони</span>
+            </div>
+            <div class="stat-card">
+              <strong>100+</strong>
+              <span>Учасників заходу</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80" alt="Учні на шкільному заході" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title">Мета та логіка створення сайту</h2>
+        <p class="section-subtitle">
+          Перед початком верстки визначено мету: створити сучасний макет односторінкового сайту для шкільного заходу.
+          Інструменти: редактор коду, HTML5 для структури, CSS3 для стилів і адаптивності. Результат перевіряється за такими
+          критеріями: коректна структура сторінки, наявність галереї, форми, навігації та зручне відображення на різних пристроях.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="container">
+        <h2 class="section-title">Програма заходу</h2>
+        <p class="section-subtitle">
+          Блоки сторінки розміщені так, щоб відвідувач одразу бачив головну інформацію, далі — програму, фото та форму зв'язку.
+        </p>
+        <div class="program-grid">
+          <article class="card">
+            <div class="card-number">01</div>
+            <h3>Відкриття заходу</h3>
+            <p>Привітання учасників, коротка презентація ідеї заходу та знайомство з основною програмою дня.</p>
+          </article>
+          <article class="card">
+            <div class="card-number">02</div>
+            <h3>Майстер-класи</h3>
+            <p>Інтерактивні станції, на яких учні можуть спробувати себе у творчих, технічних та командних активностях.</p>
+          </article>
+          <article class="card">
+            <div class="card-number">03</div>
+            <h3>Фінальна частина</h3>
+            <p>Підбиття підсумків, нагородження активних учасників та створення спільних фото на згадку.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <h2 class="section-title">Галерея</h2>
+        <p class="section-subtitle">
+          Приклад галереї для фото зі шкільного заходу. За потреби зображення легко замінити на власні.
+        </p>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=900&q=80" alt="Підготовка до заходу" />
+            <figcaption>Підготовка команди</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Спільна робота учнів" />
+            <figcaption>Командна робота</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80" alt="Виступ на шкільній сцені" />
+            <figcaption>Виступ і презентація</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-wrap">
+        <div class="contact-card">
+          <h3>Зворотний зв'язок</h3>
+          <p>
+            Цей блок потрібний для реєстрації або звернення. Форма проста, зрозуміла та містить основні поля для контакту.
+          </p>
+          <ul class="contact-list">
+            <li>Адаптивний дизайн для телефону, планшета й комп'ютера</li>
+            <li>Чітка структура та логічна навігація</li>
+            <li>Семантична HTML-розмітка</li>
+            <li>Зручні поля форми з підписами</li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <form action="#" method="post">
+            <div class="form-grid">
+              <div>
+                <label for="name">Ім'я та прізвище</label>
+                <input id="name" name="name" type="text" placeholder="Введіть ваше ім'я" required />
+              </div>
+              <div>
+                <label for="email">Електронна пошта</label>
+                <input id="email" name="email" type="email" placeholder="example@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div>
+                <label for="role">Хто ви?</label>
+                <select id="role" name="role" required>
+                  <option value="">Оберіть варіант</option>
+                  <option>Учень / учениця</option>
+                  <option>Учитель / учителька</option>
+                  <option>Мати / батько</option>
+                  <option>Гість заходу</option>
+                </select>
+              </div>
+              <div>
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" placeholder="+380..." />
+              </div>
+            </div>
+
+            <div>
+              <label for="message">Повідомлення</label>
+              <textarea id="message" name="message" placeholder="Напишіть ваше запитання або побажання" required></textarea>
+            </div>
+
+            <button class="button button-primary" type="submit">Надіслати</button>
+            <p class="form-note">
+              Перевірка валідності: використано коректну HTML-структуру, підписи до полів, типи input та required для обов'язкових полів.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Макет Landing Page для шкільного заходу • HTML + CSS • Адаптивний дизайн
+    </div>
+  </footer>
+</body>
+</html>
